@@ -14,6 +14,7 @@ interface ActivityDashBoardProps {
   closeForm: () => void;
   createOrEdit: (activity: Activity) => void;
   deleteActivity: (id: string) => void;
+  submitting: boolean;
 }
 
 const ActivityDashBoard = ({
@@ -26,6 +27,7 @@ const ActivityDashBoard = ({
   editMode,
   createOrEdit,
   deleteActivity,
+  submitting,
 }: ActivityDashBoardProps) => {
   return (
     <Grid>
@@ -34,6 +36,7 @@ const ActivityDashBoard = ({
           selectActivity={selectActivity}
           activities={activities}
           deleteActivity={deleteActivity}
+          submitting={submitting}
         ></ActivityList>
       </Grid.Column>
       <Grid.Column width="6">
@@ -51,6 +54,7 @@ const ActivityDashBoard = ({
             closeForm={closeForm}
             activity={selectedActivity}
             createOrEdit={createOrEdit}
+            submitting={submitting}
           ></ActivityForm>
         )}
       </Grid.Column>
