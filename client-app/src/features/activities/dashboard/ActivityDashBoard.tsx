@@ -6,6 +6,7 @@ import ActivityList from "./ActivityList";
 
 import { useStore } from "../../../app/store/store";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
+import ActivityFilters from "./ActivityFilters";
 
 const ActivityDashBoard = () => {
   const { activityStore } = useStore();
@@ -28,7 +29,7 @@ const ActivityDashBoard = () => {
         <ActivityList></ActivityList>
       </Grid.Column>
       <Grid.Column width="6">
-        <h2>ACtivities filter</h2>
+        <ActivityFilters></ActivityFilters>
       </Grid.Column>
     </Grid>
   );

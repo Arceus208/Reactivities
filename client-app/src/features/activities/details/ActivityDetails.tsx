@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardMeta,
-  CardDescription,
-  Image,
-  Button,
-} from "semantic-ui-react";
+import { useEffect } from "react";
+import { Grid } from "semantic-ui-react";
 import { useStore } from "../../../app/store/store";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { observer } from "mobx-react-lite";
-import {
-  Link,
-  useParams,
-} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import ActivityDetailsHeader from "./ActivityDetailsHeader";
+import ActivityDetailsInfo from "./ActivityDetailsInfo";
+import ActivityDetailsChat from "./ActivityDetailsChat";
+import ActivityDetailsSidebar from "./ActivityDetailsSidebar";
 
 const ActivityDetails = () => {
   const { activityStore } = useStore();
@@ -34,40 +27,20 @@ const ActivityDetails = () => {
     return <LoadingComponent></LoadingComponent>;
 
   return (
-    <Card fluid>
-      <Image
-        src={`/assets/categoryImages/${activity.category}.jpg`}
-        wrapped
-        ui={false}
-      />
-      <CardContent>
-        <CardHeader>{activity.title}</CardHeader>
-        <CardMeta>
-          <span>{activity.date}</span>
-        </CardMeta>
-        <CardDescription>
-          {activity.description}
-        </CardDescription>
-      </CardContent>
-      <CardContent extra>
-        <Button.Group widths="2">
-          <Button
-            as={Link}
-            to={`/manage/${activity.id}`}
-            basic
-            color="blue"
-            content="Edit"
-          ></Button>
-          <Button
-            as={Link}
-            to="/activities"
-            basic
-            color="grey"
-            content="Cancel"
-          ></Button>
-        </Button.Group>
-      </CardContent>
-    </Card>
+    <Grid>
+      <Grid.Column width={10}>
+        <ActivityDetailsHeader
+          activity={activity}
+        ></ActivityDetailsHeader>
+        <ActivityDetailsInfo
+          activity={activity}
+        ></ActivityDetailsInfo>
+        <ActivityDetailsChat></ActivityDetailsChat>
+      </Grid.Column>
+      <Grid.Column width={6}>
+        <ActivityDetailsSidebar></ActivityDetailsSidebar>
+      </Grid.Column>
+    </Grid>
   );
 };
 
