@@ -8,20 +8,20 @@ import {
   Image,
   Button,
 } from "semantic-ui-react";
+import { useStore } from "../../../app/store/store";
+import LoadingComponent from "../../../app/layout/LoadingComponent";
 
-import { Activity } from "../../../app/models/activity";
+const ActivityDetails = () => {
+  const { activityStore } = useStore();
+  const {
+    selectedActivity: activity,
+    openForm,
+    cancelSelectedActivity,
+  } = activityStore;
 
-interface ActivityDetailsProps {
-  activity: Activity;
-  cancelSelectActivity: () => void;
-  openForm: (id: string) => void;
-}
+  if (!activity)
+    return <LoadingComponent></LoadingComponent>;
 
-const ActivityDetails = ({
-  activity,
-  cancelSelectActivity,
-  openForm,
-}: ActivityDetailsProps) => {
   return (
     <Card fluid>
       <Image
@@ -49,7 +49,7 @@ const ActivityDetails = ({
             }}
           ></Button>
           <Button
-            onClick={cancelSelectActivity}
+            onClick={cancelSelectedActivity}
             basic
             color="grey"
             content="Cancel"

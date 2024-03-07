@@ -1,65 +1,31 @@
 import { Grid } from "semantic-ui-react";
-import { Activity } from "../../../app/models/activity";
+
 import ActivityList from "./ActivityList";
 import ActivityDetails from "../details/ActivityDetails";
 import ActivityForm from "../form/ActivityForm";
+import { useStore } from "../../../app/store/store";
+import { observer } from "mobx-react-lite";
 
-interface ActivityDashBoardProps {
-  activities: Activity[];
-  selectedActivity: Activity | undefined;
-  selectActivity: (id: string) => void;
-  cancelSelectActivity: () => void;
-  editMode: boolean;
-  openForm: (id: string) => void;
-  closeForm: () => void;
-  createOrEdit: (activity: Activity) => void;
-  deleteActivity: (id: string) => void;
-  submitting: boolean;
-}
+const ActivityDashBoard = () => {
+  const { activityStore } = useStore();
+  const { selectedActivity, editMode } =
+    activityStore;
 
-const ActivityDashBoard = ({
-  activities,
-  selectActivity,
-  selectedActivity,
-  cancelSelectActivity,
-  openForm,
-  closeForm,
-  editMode,
-  createOrEdit,
-  deleteActivity,
-  submitting,
-}: ActivityDashBoardProps) => {
   return (
     <Grid>
       <Grid.Column width="10">
-        <ActivityList
-          selectActivity={selectActivity}
-          activities={activities}
-          deleteActivity={deleteActivity}
-          submitting={submitting}
-        ></ActivityList>
+        <ActivityList></ActivityList>
       </Grid.Column>
       <Grid.Column width="6">
         {selectedActivity && !editMode && (
-          <ActivityDetails
-            activity={selectedActivity}
-            cancelSelectActivity={
-              cancelSelectActivity
-            }
-            openForm={openForm}
-          ></ActivityDetails>
+          <ActivityDetails></ActivityDetails>
         )}
         {editMode && (
-          <ActivityForm
-            closeForm={closeForm}
-            activity={selectedActivity}
-            createOrEdit={createOrEdit}
-            submitting={submitting}
-          ></ActivityForm>
+          <ActivityForm></ActivityForm>
         )}
       </Grid.Column>
     </Grid>
   );
 };
 
-export default ActivityDashBoard;
+export default observer(ActivityDashBoard);

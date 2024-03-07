@@ -6,7 +6,7 @@ import {
 
 interface LoadingComponentProps {
   inverted?: boolean;
-  content: string;
+  content?: string;
 }
 
 const LoadingComponent = ({
