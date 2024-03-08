@@ -8,12 +8,18 @@ import {
 import "./styles.css";
 import NavBar from "./NavBar";
 import HomePage from "../../features/home/HomePage";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const location = useLocation();
 
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        hideProgressBar
+        theme="colored"
+      ></ToastContainer>
       {location.pathname === "/" ? (
         <HomePage></HomePage>
       ) : (

@@ -30,6 +30,11 @@ const NavBar = () => {
           as={NavLink}
           to="/activities"
         ></Menu.Item>
+        <Menu.Item
+          name="Errors"
+          as={NavLink}
+          to="/errors"
+        ></Menu.Item>
         <Menu.Item>
           <Button
             as={NavLink}
