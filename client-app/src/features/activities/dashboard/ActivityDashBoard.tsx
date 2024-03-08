@@ -20,7 +20,7 @@ const ActivityDashBoard = () => {
 
   if (activityStore.loadingInitial)
     return (
-      <LoadingComponent content="Loading App"></LoadingComponent>
+      <LoadingComponent content="Loading activities..."></LoadingComponent>
     );
 
   return (

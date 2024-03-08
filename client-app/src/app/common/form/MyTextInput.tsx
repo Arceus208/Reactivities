@@ -1,11 +1,12 @@
 import { useField } from "formik";
-import React from "react";
+
 import { Form, Label } from "semantic-ui-react";
 
 interface MyTextInputProps {
   placeholder: string;
   name: string;
   label?: string;
+  type?: string;
 }
 
 const MyTextInput = (props: MyTextInputProps) => {
