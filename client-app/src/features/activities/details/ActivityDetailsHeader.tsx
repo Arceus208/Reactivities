@@ -6,8 +6,10 @@ import {
   Segment,
   Image,
 } from "semantic-ui-react";
+import { format } from "date-fns";
 
 import { Activity } from "../../../app/models/activity";
+import { Link } from "react-router-dom";
 
 const activityImageStyle = {
   filter: "brightness(30%)",
@@ -54,7 +56,12 @@ export default observer(
                     content={activity.title}
                     style={{ color: "white" }}
                   />
-                  <p>{activity.date}</p>
+                  <p>
+                    {format(
+                      activity.date!,
+                      "dd MMM yyyy"
+                    )}
+                  </p>
                   <p>
                     Hosted by <strong>Bob</strong>
                   </p>
@@ -72,6 +79,8 @@ export default observer(
           </Button>
           <Button>Cancel attendance</Button>
           <Button
+            as={Link}
+            to={`/manage/${activity.id}`}
             color="orange"
             floated="right"
           >

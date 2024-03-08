@@ -5,6 +5,7 @@ import {
   Item,
   Segment,
 } from "semantic-ui-react";
+import { format } from "date-fns";
 
 import { Activity } from "../../../app/models/activity";
 
@@ -42,8 +43,10 @@ const ActivityListItem = ({
       <Segment>
         <span>
           <Icon name="clock"></Icon>
-          {activity.date}
-
+          {format(
+            activity.date!,
+            "dd MMM yyyy h:mm aa"
+          )}
           <Icon name="marker"></Icon>
           {activity.venue}
         </span>

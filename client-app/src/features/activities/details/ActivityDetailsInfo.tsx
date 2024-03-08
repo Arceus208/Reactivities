@@ -4,6 +4,7 @@ import {
   Grid,
   Icon,
 } from "semantic-ui-react";
+import { format } from "date-fns";
 
 import { Activity } from "../../../app/models/activity";
 
@@ -41,7 +42,12 @@ export default observer(
               />
             </Grid.Column>
             <Grid.Column width={15}>
-              <span>{activity.date}</span>
+              <span>
+                {format(
+                  activity.date!,
+                  "dd MMM yyyy h:mm aa"
+                )}
+              </span>
             </Grid.Column>
           </Grid>
         </Segment>
