@@ -3,11 +3,13 @@ import {
   Button,
   Icon,
   Item,
+  Label,
   Segment,
 } from "semantic-ui-react";
 import { format } from "date-fns";
 
 import { Activity } from "../../../app/models/activity";
+import ActivityListItemAttendee from "./ActivityListItemAttendee";
 
 interface ActivityListItemProps {
   activity: Activity;
@@ -19,9 +21,18 @@ const ActivityListItem = ({
   return (
     <Segment.Group>
       <Segment>
+        {activity.isCancelled && (
+          <Label
+            attached="top"
+            color="red"
+            content="Cancelled"
+            style={{ textAlign: "center" }}
+          ></Label>
+        )}
         <Item.Group>
           <Item>
             <Item.Image
+              style={{ marginBottom: 3 }}
               size="tiny"
               circular
               src="/assets/user.png"
@@ -34,8 +45,31 @@ const ActivityListItem = ({
                 {activity.title}
               </Item.Header>
               <Item.Description>
-                Hosted by Manh
+                Hosted by{" "}
+                {activity.host?.displayName}
               </Item.Description>
+              {activity.isHost && (
+                <Item.Description>
+                  <Label
+                    basic
+                    color="orange"
+                  >
+                    You are hosting this activity
+                  </Label>
+                </Item.Description>
+              )}
+              {activity.isGoing &&
+                !activity.isHost && (
+                  <Item.Description>
+                    <Label
+                      basic
+                      color="green"
+                    >
+                      You are going to this
+                      activity
+                    </Label>
+                  </Item.Description>
+                )}
             </Item.Content>
           </Item>
         </Item.Group>
@@ -52,7 +86,9 @@ const ActivityListItem = ({
         </span>
       </Segment>
       <Segment secondary>
-        Attendees go here
+        <ActivityListItemAttendee
+          attendees={activity.attendees!}
+        ></ActivityListItemAttendee>
       </Segment>
       <Segment clearing>
         <span>{activity.description}</span>

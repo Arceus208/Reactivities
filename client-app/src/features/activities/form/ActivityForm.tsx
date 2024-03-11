@@ -13,7 +13,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
-import { Activity } from "../../../app/models/activity";
+import { ActivityFormValues } from "../../../app/models/activity";
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { Formik, Form } from "formik";
 
@@ -23,6 +23,7 @@ import MyTextArea from "../../../app/common/form/MyTextArea";
 import MySelectInput from "../../../app/common/form/MySelectInput";
 import { categoryOptions } from "../../../app/common/options/categoryOptions";
 import MyDateInput from "../../../app/common/form/MyDateInput";
+
 const ActivityForm = () => {
   const { activityStore } = useStore();
   const {
@@ -30,21 +31,14 @@ const ActivityForm = () => {
     loadingInitial,
     createActivity,
     updateActivity,
-    loading,
   } = activityStore;
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [activity, setActivity] =
-    useState<Activity>({
-      id: "",
-      title: "",
-      category: "",
-      description: "",
-      date: null,
-      city: "",
-      venue: "",
-    });
+    useState<ActivityFormValues>(
+      new ActivityFormValues()
+    );
 
   const validationSchema = Yup.object({
     title: Yup.string().required(
@@ -64,16 +58,22 @@ const ActivityForm = () => {
   useEffect(() => {
     if (id)
       loadActivity(id).then((activity) =>
-        setActivity(activity!)
+        setActivity(
+          new ActivityFormValues(activity)
+        )
       );
   }, [id, loadActivity]);
 
   const handleFormSubmit = (
-    activity: Activity
+    activity: ActivityFormValues
   ) => {
-    if (!activity.id) {
-      activity.id = uuid();
-      createActivity(activity).then(() =>
+    if (activity.id) {
+      const newActivity = {
+        ...activity,
+        id: uuid(),
+      };
+
+      createActivity(newActivity).then(() =>
         navigate(`/activities/${activity.id}`)
       );
     } else {
@@ -162,7 +162,7 @@ const ActivityForm = () => {
               positive
               type="submit"
               content="Submit"
-              loading={loading}
+              loading={isSubmitting}
             ></Button>
 
             <Button
