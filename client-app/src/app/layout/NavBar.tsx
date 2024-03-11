@@ -66,7 +66,7 @@ const NavBar = () => {
             <DropdownMenu>
               <Dropdown.Item
                 as={Link}
-                to={`/profile/${user?.username}`}
+                to={`/profiles/${user?.username}`}
                 text="My Profile"
                 icon="user"
               ></Dropdown.Item>
