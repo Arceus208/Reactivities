@@ -15,6 +15,14 @@ interface ProfileCardProps {
 const ProfileCard = ({
   profile,
 }: ProfileCardProps) => {
+  function truncate(str: string | undefined) {
+    if (str) {
+      return str.length > 40
+        ? str.substring(0, 37) + "..."
+        : str;
+    }
+  }
+
   return (
     <Card
       as={Link}
@@ -28,7 +36,7 @@ const ProfileCard = ({
           {profile.displayName}
         </Card.Header>
         <Card.Description>
-          Bio goes here
+          {truncate(profile.bio)}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>

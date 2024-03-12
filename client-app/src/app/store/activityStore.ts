@@ -242,4 +242,8 @@ export default class AcitivityStore {
       runInAction(() => (this.loading = false));
     }
   };
+
+  clearSelectedActivity = () => {
+    this.selectedActivity = undefined;
+  };
 }
