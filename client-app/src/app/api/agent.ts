@@ -108,8 +108,10 @@ axios.interceptors.request.use((config) => {
 const request = {
   get: <T>(url: string) =>
     axios.get<T>(url).then(responseBody),
+  // eslint-disable-next-line @typescript-eslint/ban-types
   post: <T>(url: string, body: {}) =>
     axios.post<T>(url, body).then(responseBody),
+  // eslint-disable-next-line @typescript-eslint/ban-types
   put: <T>(url: string, body: {}) =>
     axios.put<T>(url, body).then(responseBody),
   del: <T>(url: string) =>
@@ -181,10 +183,9 @@ const Profiles = {
     username: string,
     predicate: string
   ) =>
-    request.get<
-      UserActivity[]
-    >(`/profiles/${username}/activities?
-   predicate=${predicate}`),
+    request.get<UserActivity[]>(
+      `/profiles/${username}/activities?predicate=${predicate}`
+    ),
 };
 
 const agent = {
