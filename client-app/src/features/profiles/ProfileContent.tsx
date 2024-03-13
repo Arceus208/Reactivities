@@ -6,6 +6,7 @@ import { observer } from "mobx-react-lite";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFollowings from "./ProfileFollowings";
 import { useStore } from "../../app/store/store";
+import ProfileActivities from "./ProfileActivities";
 
 interface ProfileContentProps {
   profile: Profile;
@@ -32,7 +33,7 @@ const ProfileContent = ({
     {
       menuItem: "Events",
       render: () => (
-        <Tab.Pane>Events Content</Tab.Pane>
+        <ProfileActivities></ProfileActivities>
       ),
     },
     {
