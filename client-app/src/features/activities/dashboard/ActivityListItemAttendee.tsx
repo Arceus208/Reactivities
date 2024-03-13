@@ -14,6 +14,11 @@ interface ActivityListItemAttendeeProps {
 const ActivityListItemAttendee = ({
   attendees,
 }: ActivityListItemAttendeeProps) => {
+  const styles = {
+    borderColor: "orange",
+    borderWidth: 3,
+  };
+
   return (
     <List horizontal>
       {attendees.map((attendee) => (
@@ -32,6 +37,12 @@ const ActivityListItemAttendee = ({
                 src={
                   attendee.image ||
                   "/assets/user.png"
+                }
+                bordered
+                style={
+                  attendee.following
+                    ? styles
+                    : null
                 }
               ></Image>
             </List.Item>

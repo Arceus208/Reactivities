@@ -7,6 +7,7 @@ import {
   Image,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import FollowButton from "./FollowButton";
 
 interface ProfileCardProps {
   profile: Profile;
@@ -40,8 +41,12 @@ const ProfileCard = ({
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <Icon name="user"></Icon>20 followers
+        <Icon name="user"></Icon>
+        {profile.followersCount} followers
       </Card.Content>
+      <FollowButton
+        profile={profile}
+      ></FollowButton>
     </Card>
   );
 };

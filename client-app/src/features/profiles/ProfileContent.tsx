@@ -4,6 +4,8 @@ import ProfilePhotos from "./ProfilePhotos";
 import { Profile } from "../../app/models/profile";
 import { observer } from "mobx-react-lite";
 import ProfileAbout from "./ProfileAbout";
+import ProfileFollowings from "./ProfileFollowings";
+import { useStore } from "../../app/store/store";
 
 interface ProfileContentProps {
   profile: Profile;
@@ -12,6 +14,8 @@ interface ProfileContentProps {
 const ProfileContent = ({
   profile,
 }: ProfileContentProps) => {
+  const { profileStore } = useStore();
+
   const panes = [
     {
       menuItem: "About",
@@ -34,13 +38,13 @@ const ProfileContent = ({
     {
       menuItem: "Followers",
       render: () => (
-        <Tab.Pane>Followers Content</Tab.Pane>
+        <ProfileFollowings></ProfileFollowings>
       ),
     },
     {
       menuItem: "Following",
       render: () => (
-        <Tab.Pane>Following Content</Tab.Pane>
+        <ProfileFollowings></ProfileFollowings>
       ),
     },
   ];
@@ -49,6 +53,11 @@ const ProfileContent = ({
       menu={{ fluid: true, vertical: true }}
       menuPosition="right"
       panes={panes}
+      onTabChange={(_, data) =>
+        profileStore.setActiveTab(
+          data.activeIndex as number
+        )
+      }
     ></Tab>
   );
 };
